@@ -1,16 +1,29 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Output, ChangeDetectionStrategy, EventEmitter } from '@angular/core';
+
+import { FormBuilder, Validators } from '@angular/forms';
+import { Todo } from '../../models/todo.model';
 
 @Component({
   selector: 'app-todo-form',
   templateUrl: './todo-form.component.html',
   styleUrls: ['./todo-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TodoFormComponent implements OnInit {
+export class TodoFormComponent {
+  @Output() create = new EventEmitter<Partial<Todo>>();
 
-  constructor() { }
+  form = this.fb.group({
+    text: ['', Validators.required],
+  });
 
-  ngOnInit(): void {
+  constructor(private fb: FormBuilder) {}
+
+  onSubmit() {
+    const text: string = this.form.get('text').value;
+    const todo: Partial<Todo> = {
+      text,
+    };
+    this.create.emit(todo);
+    this.form.reset();
   }
-
 }
