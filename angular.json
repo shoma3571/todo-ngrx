@@ -127,6 +127,7 @@
   },
   "defaultProject": "todo-ngrx",
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "defaultCollection": "@ngrx/schematics"
   }
 }
