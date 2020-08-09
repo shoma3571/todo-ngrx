@@ -11,6 +11,7 @@ import { Todo } from '../../models/todo.model';
 })
 export class TodoListItemComponent implements OnInit {
   @Input() todo: Todo;
+  @Input() loading: boolean;
   @Output() update = new EventEmitter<Todo>();
   @Output() remove = new EventEmitter<number>();
 
